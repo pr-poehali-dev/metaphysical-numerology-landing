@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Icon from "@/components/ui/icon";
 
-const MASTER_PHOTO = "https://cdn.poehali.dev/projects/ff1b248f-5bab-4930-b495-cc6d5b490a92/files/0d042fd0-31ea-44e7-be00-5ddc0bf8e6f9.jpg";
+const MASTER_PHOTO = "https://cdn.poehali.dev/projects/ff1b248f-5bab-4930-b495-cc6d5b490a92/bucket/6f2c63e3-49d0-422b-bfb4-f9bf2086a17f.jpg";
 
 function reduceNumber(n: number): number {
   while (n > 9) {
