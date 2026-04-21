@@ -4,98 +4,242 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 40 30% 97%;
+    --foreground: 30 15% 22%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 30 15% 22%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 30 15% 22%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 340 30% 62%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 35 40% 93%;
+    --secondary-foreground: 30 15% 30%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 35 20% 94%;
+    --muted-foreground: 30 10% 52%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 20 40% 88%;
+    --accent-foreground: 30 15% 22%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 35 20% 88%;
+    --input: 35 20% 88%;
+    --ring: 340 30% 62%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-background: 40 30% 97%;
+    --sidebar-foreground: 30 15% 22%;
+    --sidebar-primary: 340 30% 62%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-}
+    --sidebar-accent: 35 40% 93%;
+    --sidebar-accent-foreground: 30 15% 22%;
+    --sidebar-border: 35 20% 88%;
+    --sidebar-ring: 340 30% 62%;
 
-@layer base {
+    --cream: #f7f3ee;
+    --blush: #d4939a;
+    --blush-light: #eddde0;
+    --sand: #e8ddd0;
+    --warm-dark: #3d2f28;
+    --warm-mid: #7a6054;
+    --gold: #c9a96e;
+  }
+
   * {
     @apply border-border;
   }
 
   body {
     @apply bg-background text-foreground;
+    font-family: "Golos Text", sans-serif;
+    font-weight: 400;
+    background-color: var(--cream);
+    color: var(--warm-dark);
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: "Cormorant", serif;
+    font-weight: 400;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  .font-cormorant {
+    font-family: "Cormorant", serif;
+  }
+  .font-golos {
+    font-family: "Golos Text", sans-serif;
+  }
+
+  .text-blush {
+    color: var(--blush);
+  }
+  .text-warm-dark {
+    color: var(--warm-dark);
+  }
+  .text-warm-mid {
+    color: var(--warm-mid);
+  }
+  .text-gold {
+    color: var(--gold);
+  }
+
+  .bg-blush {
+    background-color: var(--blush);
+  }
+  .bg-blush-light {
+    background-color: var(--blush-light);
+  }
+  .bg-sand {
+    background-color: var(--sand);
+  }
+  .bg-cream {
+    background-color: var(--cream);
+  }
+
+  .border-blush {
+    border-color: var(--blush);
+  }
+  .border-sand {
+    border-color: var(--sand);
+  }
+
+  .nav-link {
+    font-family: "Golos Text", sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+    color: var(--warm-mid);
+  }
+  .nav-link:hover {
+    color: var(--blush);
+  }
+
+  .btn-primary {
+    padding: 0.75rem 2rem;
+    border-radius: 9999px;
+    color: white;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-family: "Golos Text", sans-serif;
+    transition: all 0.3s;
+    background-color: var(--blush);
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+  }
+  .btn-primary:hover {
+    background-color: #c07d84;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px rgba(212, 147, 154, 0.35);
+  }
+
+  .btn-outline {
+    padding: 0.75rem 2rem;
+    border-radius: 9999px;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-family: "Golos Text", sans-serif;
+    transition: all 0.3s;
+    color: var(--blush);
+    border: 1px solid var(--blush);
+    background: transparent;
+    cursor: pointer;
+    display: inline-block;
+  }
+  .btn-outline:hover {
+    background-color: var(--blush-light);
+  }
+
+  .card-soft {
+    background: white;
+    border: 1px solid var(--sand);
+    border-radius: 1.25rem;
+  }
+
+  .matrix-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.75rem;
+    font-family: "Cormorant", serif;
+    font-size: 1.5rem;
+    font-weight: 500;
+    transition: all 0.5s;
+    background: var(--blush-light);
+    color: var(--warm-dark);
+    border: 1px solid var(--sand);
+    min-height: 64px;
+  }
+
+  .matrix-cell.filled {
+    background: var(--blush);
+    color: white;
+  }
+
+  .fade-in {
+    animation: fadeInUp 0.6s ease-out both;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .stagger-1 {
+    animation-delay: 0.1s;
+  }
+  .stagger-2 {
+    animation-delay: 0.2s;
+  }
+  .stagger-3 {
+    animation-delay: 0.3s;
+  }
+  .stagger-4 {
+    animation-delay: 0.4s;
+  }
+  .stagger-5 {
+    animation-delay: 0.5s;
+  }
+  .stagger-6 {
+    animation-delay: 0.6s;
+  }
+
+  .section-title {
+    font-family: "Cormorant", serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 300;
+    color: var(--warm-dark);
+    line-height: 1.15;
+  }
+
+  .section-subtitle {
+    font-family: "Golos Text", sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--blush);
   }
 }
