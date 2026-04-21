@@ -300,8 +300,8 @@ const Index = () => {
               >
                 <span style={{ fontSize: "1.5rem" }}>✨</span>
                 <div>
-                  <p className="font-cormorant" style={{ color: "var(--warm-dark)", fontSize: "0.9rem", fontWeight: 500 }}>12 лет практики</p>
-                  <p className="font-golos" style={{ color: "var(--warm-mid)", fontSize: "0.7rem" }}>более 2000 консультаций</p>
+                  <p className="font-cormorant" style={{ color: "var(--warm-dark)", fontSize: "0.9rem", fontWeight: 500 }}>5 лет практики</p>
+                  <p className="font-golos" style={{ color: "var(--warm-mid)", fontSize: "0.7rem" }}>более 200 консультаций</p>
                 </div>
               </div>
             </div>
@@ -322,8 +322,8 @@ const Index = () => {
           </div>
           <div className="grid md:grid-cols-3 gap-6">
             {[
-              { num: "2 000+", label: "Консультаций проведено" },
-              { num: "12", label: "Лет в нумерологии" },
+              { num: "200+", label: "Консультаций проведено" },
+              { num: "5", label: "Лет в нумерологии" },
               { num: "98%", label: "Довольных клиентов" },
             ].map((s, i) => (
               <div key={i} className={`card-soft p-8 text-center fade-in stagger-${i + 1}`}>
