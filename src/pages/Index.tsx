@@ -323,79 +323,81 @@ const Index = () => {
       </section>
 
       {/* 3. О МАСТЕРЕ */}
-      <section id="about" className="py-20 px-6" style={{ scrollMarginTop: "5rem" }}>
+      <section id="about" className="py-16 px-6" style={{ scrollMarginTop: "5rem" }}>
         <div className="max-w-5xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-14 items-start">
-            <div>
-              <p className="section-subtitle mb-3">О мастере</p>
-              <h2 className="section-title mb-6">
-                Меня зовут Надежда Ельчина.<br />
-                Я создала «Инструкцию к человеку»
-              </h2>
-              <div className="font-golos leading-relaxed flex flex-col gap-4" style={{ color: "var(--warm-mid)", fontSize: "0.92rem" }}>
-                <p>
-                  5 лет я искала ответ: почему даже глубокие разборы не дают долгосрочного результата?
-                </p>
-                <p>
-                  Потому что любой метод — это только один срез. А человек — это система.
-                </p>
-                <p>Я соединила 4 разрозненные системы в единую живую методологию:</p>
-                <ul className="flex flex-col gap-2 pl-1">
-                  {[
-                    "Нумерологию и Матрицу судьбы — кармические задачи, предназначение, денежный код",
-                    "Нейрофизиологию личности (NEURO ID) — ваш ведущий гормон и тип мозга",
-                    "Ритмологию — расшифровку вашего ФИО через индивидуальную мандалу. Вы узнаете свои сильные стороны, есть ли родовая поддержка, что в имени помогает влиять на пространство, а что мешает достигать целей, и какие уроки вы будете проходить, пока не смените ФИО.",
-                  ].map((item, i) => (
-                    <li key={i} className="flex gap-2">
-                      <span style={{ color: "var(--blush)", flexShrink: 0 }}>•</span>
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-                <p>
-                  Результат — не разрозненные факты о вас. А «Инструкция к человеку»: чёткий экшн-план, привязанный к вашему нейротипу, и понимание законов мироздания, которые вы нарушаете.
-                </p>
-                <p style={{ color: "var(--warm-dark)", fontWeight: 500 }}>
-                  Я не даю волшебную таблетку. Я даю карту, компас и знание, как не заблудиться снова.
-                </p>
-              </div>
-              <a
-                href="https://t.me/NadezhdaElka"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-primary inline-block mt-8"
-              >
-                Узнать свой НЕЙРО-ID
-              </a>
+          <p className="section-subtitle mb-2">О мастере</p>
+          <h2 className="section-title mb-6">
+            Меня зовут Надежда Ельчина.<br />
+            Я создала «Инструкцию к человеку»
+          </h2>
+
+          {/* Таблички — float справа на десктопе */}
+          <div className="md:float-right md:ml-8 md:mb-4 mb-6 flex flex-col gap-4 md:w-64">
+            <div className="grid grid-cols-3 gap-3">
+              {[
+                { num: "200+", label: "консультаций" },
+                { num: "5", label: "лет в работе" },
+                { num: "98%", label: "довольных" },
+              ].map((s, i) => (
+                <div key={i} className="card-soft p-3 text-center">
+                  <p className="font-cormorant" style={{ color: "var(--blush)", fontSize: "1.6rem" }}>{s.num}</p>
+                  <p className="font-golos" style={{ color: "var(--warm-mid)", fontSize: "0.65rem" }}>{s.label}</p>
+                </div>
+              ))}
             </div>
-            <div className="flex flex-col gap-5">
-              <div className="grid grid-cols-3 gap-4 mb-2">
-                {[
-                  { num: "200+", label: "Консультаций проведено" },
-                  { num: "5", label: "Лет в работе" },
-                  { num: "98%", label: "Довольных клиентов" },
-                ].map((s, i) => (
-                  <div key={i} className="card-soft p-5 text-center">
-                    <p className="font-cormorant" style={{ color: "var(--blush)", fontSize: "2.2rem" }}>{s.num}</p>
-                    <p className="font-golos" style={{ color: "var(--warm-mid)", fontSize: "0.72rem" }}>{s.label}</p>
-                  </div>
-                ))}
-              </div>
-              <div className="card-soft p-6">
-                <p className="font-golos font-medium mb-3" style={{ color: "var(--warm-dark)", fontSize: "0.9rem" }}>
-                  Методологии в системе:
-                </p>
-                {["Нумерология", "Матрица судьбы", "NEURO ID", "Ритмология"].map((t, i) => (
-                  <div
-                    key={i}
-                    className="px-4 py-2 rounded-xl mb-2 font-golos text-sm"
-                    style={{ background: "var(--blush-light)", color: "var(--warm-dark)", border: "1px solid var(--sand)" }}
-                  >
-                    {t}
-                  </div>
-                ))}
-              </div>
+            <div className="card-soft p-4">
+              <p className="font-golos font-medium mb-2" style={{ color: "var(--warm-dark)", fontSize: "0.8rem" }}>
+                Методологии в системе:
+              </p>
+              {["Нумерология", "Матрица судьбы", "НЕЙРО ID", "Ритмология"].map((t, i) => (
+                <div
+                  key={i}
+                  className="px-3 py-1.5 rounded-lg mb-1.5 font-golos text-xs"
+                  style={{ background: "var(--blush-light)", color: "var(--warm-dark)", border: "1px solid var(--sand)" }}
+                >
+                  {t}
+                </div>
+              ))}
             </div>
+          </div>
+
+          <div className="font-golos leading-relaxed flex flex-col gap-3" style={{ color: "var(--warm-mid)", fontSize: "0.9rem" }}>
+            <p>
+              5 лет я искала ответ: почему даже глубокие разборы не дают долгосрочного результата?
+              Потому что любой метод — это только один срез. А человек — это система.
+            </p>
+            <p>Я соединила 4 разрозненные системы в единую живую методологию:</p>
+            <ul className="flex flex-col gap-2 pl-1">
+              <li className="flex gap-2">
+                <span style={{ color: "var(--blush)", flexShrink: 0 }}>•</span>
+                <span><strong style={{ color: "var(--warm-dark)" }}>Нумерологию и Матрицу судьбы —</strong> кармические задачи, предназначение, денежный код</span>
+              </li>
+              <li className="flex gap-2">
+                <span style={{ color: "var(--blush)", flexShrink: 0 }}>•</span>
+                <span><strong style={{ color: "var(--warm-dark)" }}>Нейрофизиологию личности (НЕЙРО ID) —</strong> ваш ведущий гормон и тип мозга</span>
+              </li>
+              <li className="flex gap-2">
+                <span style={{ color: "var(--blush)", flexShrink: 0 }}>•</span>
+                <span><strong style={{ color: "var(--warm-dark)" }}>Ритмологию —</strong> расшифровку вашего ФИО через индивидуальную мандалу. Вы узнаете свои сильные стороны, есть ли родовая поддержка, что в имени помогает влиять на пространство, а что мешает достигать целей, и какие уроки вы будете проходить, пока не смените ФИО.</span>
+              </li>
+            </ul>
+            <p>
+              <strong style={{ color: "var(--warm-dark)" }}>Результат —</strong> не разрозненные факты о вас. А «Инструкция к человеку»: чёткий экшн-план, привязанный к вашему нейротипу, и понимание законов мироздания, которые вы нарушаете.
+            </p>
+            <p style={{ color: "var(--warm-dark)", fontWeight: 500 }}>
+              Я не даю волшебную таблетку. Я даю карту, компас и знание, как не заблудиться снова.
+            </p>
+          </div>
+
+          <div className="md:clear-both pt-6">
+            <a
+              href="https://t.me/NadezhdaElka"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary inline-block"
+            >
+              Узнать свой НЕЙРО-ID
+            </a>
           </div>
         </div>
       </section>
