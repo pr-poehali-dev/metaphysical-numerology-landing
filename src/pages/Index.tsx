@@ -570,16 +570,45 @@ const Index = () => {
 
       {/* 9. ОТЗЫВЫ (скриншоты) */}
       <section className="py-20 px-6" style={{ background: "var(--blush-light)" }}>
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12">
             <p className="section-subtitle mb-3">Отзывы</p>
             <h2 className="section-title">Что говорят клиенты</h2>
           </div>
-          <div className="card-soft p-10 text-center mb-8">
-            <p className="font-golos" style={{ color: "var(--warm-mid)", fontSize: "0.9rem" }}>
-              Скриншоты переписок появятся здесь — они сейчас готовятся.
-            </p>
+
+          {/* Скриншоты переписок */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+            {/* Отзыв 1 — большой, на всю ширину */}
+            <div className="md:col-span-2 rounded-2xl overflow-hidden shadow-md" style={{ background: "#fff" }}>
+              <img
+                src="https://cdn.poehali.dev/projects/ff1b248f-5bab-4930-b495-cc6d5b490a92/bucket/9f1f5877-8369-4121-9f33-862c424728d4.png"
+                alt="Отзыв клиента"
+                className="w-full h-auto object-contain"
+                style={{ display: "block" }}
+              />
+            </div>
+
+            {/* Отзыв 2 */}
+            <div className="rounded-2xl overflow-hidden shadow-md" style={{ background: "#fff" }}>
+              <img
+                src="https://cdn.poehali.dev/projects/ff1b248f-5bab-4930-b495-cc6d5b490a92/bucket/8df997d2-61c8-4fc8-b827-5a959b4122da.png"
+                alt="Отзыв клиента — Людмила Ефремова"
+                className="w-full h-auto object-contain"
+                style={{ display: "block" }}
+              />
+            </div>
+
+            {/* Отзыв 3 */}
+            <div className="rounded-2xl overflow-hidden shadow-md" style={{ background: "#fff" }}>
+              <img
+                src="https://cdn.poehali.dev/projects/ff1b248f-5bab-4930-b495-cc6d5b490a92/bucket/757c7cf3-30d8-4a84-aeab-d1488b0682d4.png"
+                alt="Отзывы клиентов — Надежда и Олеся"
+                className="w-full h-auto object-contain"
+                style={{ display: "block" }}
+              />
+            </div>
           </div>
+
           <div className="text-center">
             <a
               href="https://t.me/neuro_mba_bot/?start=neuroid_ikvycrcw4"
