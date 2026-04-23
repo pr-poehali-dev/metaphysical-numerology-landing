@@ -651,6 +651,16 @@ const Index = () => {
                   <Icon name="Users" size={16} style={{ color: "var(--blush)" }} />
                   ВКонтакте: nadyaelchina
                 </a>
+                <a
+                  href="https://max.ru/u/f9LHodD0cOKfmYa3-COWNH-POePbpYOmXYAMV2XhCZO-LuKGdVDNvpBWEaY"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 font-golos text-sm"
+                  style={{ color: "var(--warm-mid)" }}
+                >
+                  <Icon name="MessageSquare" size={16} style={{ color: "var(--blush)" }} />
+                  MAX: Надежда Ельчина
+                </a>
               </div>
             </div>
           </div>
