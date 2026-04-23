@@ -185,7 +185,7 @@ const Index = () => {
             ))}
           </div>
           <a
-            href="https://t.me/NadezhdaElka"
+            href="https://t.me/neuro_mba_bot/?start=neuroid_ikvycrcw4"
             target="_blank"
             rel="noopener noreferrer"
             className="hidden md:inline-block btn-primary"
@@ -211,7 +211,7 @@ const Index = () => {
                 {item.label}
               </a>
             ))}
-            <a href="https://t.me/NadezhdaElka" target="_blank" rel="noopener noreferrer" className="btn-primary text-center mt-2">
+            <a href="https://t.me/neuro_mba_bot/?start=neuroid_ikvycrcw4" target="_blank" rel="noopener noreferrer" className="btn-primary text-center mt-2">
               Пройти тест
             </a>
           </div>
@@ -240,7 +240,7 @@ const Index = () => {
               Бесплатно. Без регистрации. Результат сразу.
             </p>
             <a
-              href="https://t.me/NadezhdaElka"
+              href="https://t.me/neuro_mba_bot/?start=neuroid_ikvycrcw4"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-primary inline-block"
@@ -311,7 +311,7 @@ const Index = () => {
           </p>
           <div className="text-center">
             <a
-              href="https://t.me/NadezhdaElka"
+              href="https://t.me/neuro_mba_bot/?start=neuroid_ikvycrcw4"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-primary inline-block"
@@ -391,7 +391,7 @@ const Index = () => {
 
           <div className="md:clear-both pt-6">
             <a
-              href="https://t.me/NadezhdaElka"
+              href="https://t.me/neuro_mba_bot/?start=neuroid_ikvycrcw4"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-primary inline-block"
@@ -424,7 +424,7 @@ const Index = () => {
           </div>
           <div className="text-center">
             <a
-              href="https://t.me/NadezhdaElka"
+              href="https://t.me/neuro_mba_bot/?start=neuroid_ikvycrcw4"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-primary inline-block"
@@ -475,7 +475,7 @@ const Index = () => {
           </div>
           <div className="text-center">
             <a
-              href="https://t.me/NadezhdaElka"
+              href="https://t.me/neuro_mba_bot/?start=neuroid_ikvycrcw4"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-primary inline-block"
@@ -514,7 +514,7 @@ const Index = () => {
           </div>
           <div className="text-center">
             <a
-              href="https://t.me/NadezhdaElka"
+              href="https://t.me/neuro_mba_bot/?start=neuroid_ikvycrcw4"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-primary inline-block"
@@ -539,7 +539,7 @@ const Index = () => {
           </div>
           <div className="text-center">
             <a
-              href="https://t.me/NadezhdaElka"
+              href="https://t.me/neuro_mba_bot/?start=neuroid_ikvycrcw4"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-primary inline-block"
@@ -579,7 +579,7 @@ const Index = () => {
           </div>
           <div className="text-center">
             <a
-              href="https://t.me/NadezhdaElka"
+              href="https://t.me/neuro_mba_bot/?start=neuroid_ikvycrcw4"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-primary inline-block"
@@ -604,7 +604,7 @@ const Index = () => {
                 Система «Инструкция к человеку»
               </p>
               <a
-                href="https://t.me/NadezhdaElka"
+                href="https://t.me/neuro_mba_bot/?start=neuroid_ikvycrcw4"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-primary inline-block"
@@ -632,7 +632,7 @@ const Index = () => {
               <p className="font-golos font-medium mb-4 text-sm" style={{ color: "var(--warm-dark)" }}>Контакты</p>
               <div className="flex flex-col gap-3">
                 <a
-                  href="https://t.me/NadezhdaElka"
+                  href="https://t.me/neuro_mba_bot/?start=neuroid_ikvycrcw4"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 font-golos text-sm"
