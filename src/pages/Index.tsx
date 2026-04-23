@@ -1,6 +1,58 @@
 import { useState } from "react";
 import Icon from "@/components/ui/icon";
 
+interface ReviewSlide { src: string; alt: string; }
+
+function ReviewCarousel({ slides }: { slides: ReviewSlide[] }) {
+  const [current, setCurrent] = useState(0);
+  const prev = () => setCurrent((c) => (c - 1 + slides.length) % slides.length);
+  const next = () => setCurrent((c) => (c + 1) % slides.length);
+
+  return (
+    <div className="relative">
+      <div className="rounded-2xl overflow-hidden shadow-md" style={{ background: "#fff" }}>
+        <img
+          src={slides[current].src}
+          alt={slides[current].alt}
+          className="w-full object-contain"
+          style={{ maxHeight: "60vh", display: "block", margin: "0 auto" }}
+        />
+      </div>
+
+      {/* Стрелки */}
+      <button
+        onClick={prev}
+        className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 flex items-center justify-center w-10 h-10 rounded-full shadow-md transition-opacity hover:opacity-80"
+        style={{ background: "var(--blush)", color: "#fff" }}
+        aria-label="Предыдущий"
+      >
+        <Icon name="ChevronLeft" size={20} />
+      </button>
+      <button
+        onClick={next}
+        className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 flex items-center justify-center w-10 h-10 rounded-full shadow-md transition-opacity hover:opacity-80"
+        style={{ background: "var(--blush)", color: "#fff" }}
+        aria-label="Следующий"
+      >
+        <Icon name="ChevronRight" size={20} />
+      </button>
+
+      {/* Точки */}
+      <div className="flex justify-center gap-2 mt-4">
+        {slides.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setCurrent(i)}
+            className="w-2 h-2 rounded-full transition-all"
+            style={{ background: i === current ? "var(--blush)" : "var(--sand)" }}
+            aria-label={`Слайд ${i + 1}`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 const MASTER_PHOTO = "https://cdn.poehali.dev/projects/ff1b248f-5bab-4930-b495-cc6d5b490a92/bucket/6f2c63e3-49d0-422b-bfb4-f9bf2086a17f.jpg";
 
 const NAV_ITEMS = [
@@ -568,55 +620,41 @@ const Index = () => {
         </div>
       </section>
 
-      {/* 9. ОТЗЫВЫ (скриншоты) */}
-      <section className="py-20 px-6" style={{ background: "var(--blush-light)" }}>
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-12">
+      {/* 9. ОТЗЫВЫ (карусель) */}
+      <section id="reviews" className="py-14 px-6" style={{ background: "var(--blush-light)" }}>
+        <div className="max-w-xl mx-auto">
+          <div className="text-center mb-8">
             <p className="section-subtitle mb-3">Отзывы</p>
             <h2 className="section-title">Что говорят клиенты</h2>
           </div>
 
-          {/* Скриншоты переписок */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
-            {/* Отзыв 1 — большой, на всю ширину */}
-            <div className="md:col-span-2 rounded-2xl overflow-hidden shadow-md" style={{ background: "#fff" }}>
-              <img
-                src="https://cdn.poehali.dev/projects/ff1b248f-5bab-4930-b495-cc6d5b490a92/bucket/9f1f5877-8369-4121-9f33-862c424728d4.png"
-                alt="Отзыв клиента"
-                className="w-full h-auto object-contain"
-                style={{ display: "block" }}
-              />
-            </div>
+          {/* Карусель */}
+          {(() => {
+            const slides = [
+              {
+                src: "https://cdn.poehali.dev/projects/ff1b248f-5bab-4930-b495-cc6d5b490a92/bucket/9f1f5877-8369-4121-9f33-862c424728d4.png",
+                alt: "Отзыв клиента",
+              },
+              {
+                src: "https://cdn.poehali.dev/projects/ff1b248f-5bab-4930-b495-cc6d5b490a92/bucket/8df997d2-61c8-4fc8-b827-5a959b4122da.png",
+                alt: "Отзыв — Людмила Ефремова",
+              },
+              {
+                src: "https://cdn.poehali.dev/projects/ff1b248f-5bab-4930-b495-cc6d5b490a92/bucket/757c7cf3-30d8-4a84-aeab-d1488b0682d4.png",
+                alt: "Отзывы — Надежда и Олеся",
+              },
+            ];
+            return <ReviewCarousel slides={slides} />;
+          })()}
 
-            {/* Отзыв 2 */}
-            <div className="rounded-2xl overflow-hidden shadow-md" style={{ background: "#fff" }}>
-              <img
-                src="https://cdn.poehali.dev/projects/ff1b248f-5bab-4930-b495-cc6d5b490a92/bucket/8df997d2-61c8-4fc8-b827-5a959b4122da.png"
-                alt="Отзыв клиента — Людмила Ефремова"
-                className="w-full h-auto object-contain"
-                style={{ display: "block" }}
-              />
-            </div>
-
-            {/* Отзыв 3 */}
-            <div className="rounded-2xl overflow-hidden shadow-md" style={{ background: "#fff" }}>
-              <img
-                src="https://cdn.poehali.dev/projects/ff1b248f-5bab-4930-b495-cc6d5b490a92/bucket/757c7cf3-30d8-4a84-aeab-d1488b0682d4.png"
-                alt="Отзывы клиентов — Надежда и Олеся"
-                className="w-full h-auto object-contain"
-                style={{ display: "block" }}
-              />
-            </div>
-          </div>
-
-          <div className="text-center">
+          <div className="text-center mt-8">
             <a
               href="https://t.me/neuro_mba_bot/?start=neuroid_ikvycrcw4"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-primary inline-block"
             >
-              Пройти тест как Анна и Михаил
+              ПРОЙТИ ТЕСТ БЕСПЛАТНО
             </a>
           </div>
         </div>
