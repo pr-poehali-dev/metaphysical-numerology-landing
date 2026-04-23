@@ -227,11 +227,14 @@ const Index = () => {
           <div className="fade-in">
             <h1
               className="font-cormorant mb-5 leading-tight"
-              style={{ fontSize: "clamp(2.2rem, 5.5vw, 4rem)", fontWeight: 400, color: "var(--warm-dark)" }}
+              style={{ fontWeight: 400, color: "var(--warm-dark)" }}
             >
-              Узнайте свой{" "}
-              <em style={{ color: "var(--blush)", fontStyle: "italic" }}>НЕЙРО-ID</em>
-              {" "}за 5 минут
+              <span style={{ fontSize: "clamp(2.2rem, 6.5vw, 4.6rem)", whiteSpace: "nowrap" }}>
+                Узнайте свой{" "}
+                <em style={{ color: "var(--blush)", fontStyle: "italic" }}>НЕЙРО-ID</em>
+              </span>
+              <br />
+              <span style={{ fontSize: "clamp(2rem, 5.5vw, 3.8rem)" }}>за 5 минут</span>
             </h1>
             <p className="font-golos leading-relaxed mb-2" style={{ color: "var(--warm-mid)", fontSize: "1rem" }}>
               Ведущий гормон + тип мозга + уровень энергии
@@ -243,7 +246,7 @@ const Index = () => {
               href="https://t.me/neuro_mba_bot/?start=neuroid_ikvycrcw4"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-primary inline-block"
+              className="btn-primary inline-block text-center"
               style={{ fontSize: "1rem", padding: "0.9rem 2rem" }}
             >
               Бесплатно пройти тест НЕЙРО-ID
