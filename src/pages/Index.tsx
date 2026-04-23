@@ -333,15 +333,15 @@ const Index = () => {
 
           {/* Таблички — float справа на десктопе */}
           <div className="md:float-right md:ml-8 md:mb-4 mb-6 flex flex-col gap-4 md:w-64">
-            <div className="grid grid-cols-3 gap-3">
+            <div className="flex flex-col gap-2">
               {[
-                { num: "200+", label: "консультаций" },
-                { num: "5", label: "лет в работе" },
-                { num: "98%", label: "довольных" },
+                { num: "200+", label: "консультаций проведено" },
+                { num: "5 лет", label: "практики" },
+                { num: "98%", label: "довольных клиентов" },
               ].map((s, i) => (
-                <div key={i} className="card-soft p-3 text-center">
-                  <p className="font-cormorant" style={{ color: "var(--blush)", fontSize: "1.6rem" }}>{s.num}</p>
-                  <p className="font-golos" style={{ color: "var(--warm-mid)", fontSize: "0.65rem" }}>{s.label}</p>
+                <div key={i} className="card-soft px-4 py-3 flex items-center gap-3">
+                  <p className="font-cormorant flex-shrink-0" style={{ color: "var(--blush)", fontSize: "1.5rem", minWidth: "3.5rem" }}>{s.num}</p>
+                  <p className="font-golos" style={{ color: "var(--warm-mid)", fontSize: "0.75rem" }}>{s.label}</p>
                 </div>
               ))}
             </div>
