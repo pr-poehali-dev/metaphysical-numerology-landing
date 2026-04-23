@@ -22,7 +22,7 @@ const FAQ_ITEMS = [
 
 const SERVICES_DATA = [
   {
-    title: "Расшифровка NEURO ID",
+    title: "Расшифровка НЕЙРО ID",
     desc: "PDF 5 страниц: ваш код, гормон, тип мозга, 3 шага",
     price: "1 500 руб.",
     premium: false,
