@@ -3,148 +3,88 @@ import Icon from "@/components/ui/icon";
 
 const MASTER_PHOTO = "https://cdn.poehali.dev/projects/ff1b248f-5bab-4930-b495-cc6d5b490a92/bucket/6f2c63e3-49d0-422b-bfb4-f9bf2086a17f.jpg";
 
-function reduceNumber(n: number): number {
-  while (n > 9) {
-    n = String(n).split("").reduce((s, d) => s + parseInt(d), 0);
-  }
-  return n;
-}
-
-function calcPythagorasMatrix(dateStr: string) {
-  const [day, month, year] = dateStr.split(".").map(Number);
-  if (!day || !month || !year) return null;
-
-  const digits = `${String(day).padStart(2, "0")}${String(month).padStart(2, "0")}${year}`
-    .split("").map(Number);
-
-  const sum1 = digits.reduce((a, b) => a + b, 0);
-  const sum2 = reduceNumber(sum1);
-  const sum3 = sum1 - 2 * digits[0];
-  const sum4 = reduceNumber(sum3);
-
-  const allDigits = [...digits, sum1, sum2, sum3, sum4].map(String).join("");
-
-  const counts: Record<number, number> = {};
-  for (let i = 1; i <= 9; i++) counts[i] = 0;
-  for (const ch of allDigits) {
-    const d = parseInt(ch);
-    if (d >= 1 && d <= 9) counts[d]++;
-  }
-
-  return { counts, sum1, sum2, sum3, sum4 };
-}
-
-const INTERPRETATIONS: Record<number, { title: string; desc: string }> = {
-  1: { title: "Воля и характер", desc: "Отражает силу характера, уверенность в себе и способность вести за собой." },
-  2: { title: "Энергия", desc: "Показывает жизненную силу, здоровье и физическую активность." },
-  3: { title: "Познание", desc: "Интеллект, стремление к знаниям и способность к анализу." },
-  4: { title: "Здоровье", desc: "Физическое состояние тела, иммунитет и жизненные ресурсы." },
-  5: { title: "Логика", desc: "Способность к логическому мышлению и рациональным решениям." },
-  6: { title: "Труд", desc: "Трудолюбие, умение работать руками и создавать материальные ценности." },
-  7: { title: "Удача", desc: "Везение, интуиция и способность оказываться в нужном месте в нужное время." },
-  8: { title: "Долг", desc: "Чувство ответственности, обязательность и социальная роль." },
-  9: { title: "Память", desc: "Мудрость, жизненный опыт и связь с прошлым." },
-};
-
-const MATRIX_POSITIONS = [
-  [1, 4, 7],
-  [2, 5, 8],
-  [3, 6, 9],
-];
-
 const NAV_ITEMS = [
   { label: "О мастере", href: "#about" },
-  { label: "Калькулятор", href: "#calculator" },
   { label: "Услуги", href: "#services" },
   { label: "Отзывы", href: "#reviews" },
-  { label: "Контакты", href: "#contacts" },
   { label: "FAQ", href: "#faq" },
-];
-
-const SERVICES = [
-  {
-    icon: "Star",
-    title: "Матрица судьбы",
-    desc: "Полный расчёт вашей матрицы Пифагора с детальной интерпретацией каждого числа.",
-    price: "от 3 500 ₽",
-    duration: "60 мин",
-  },
-  {
-    icon: "Heart",
-    title: "Совместимость пар",
-    desc: "Анализ числовой совместимости двух людей — для отношений, бизнеса, семьи.",
-    price: "от 4 500 ₽",
-    duration: "75 мин",
-  },
-  {
-    icon: "Sparkles",
-    title: "Прогноз на год",
-    desc: "Персональный нумерологический прогноз по месяцам с ключевыми датами.",
-    price: "от 5 000 ₽",
-    duration: "90 мин",
-  },
-  {
-    icon: "Briefcase",
-    title: "Нумерология имени",
-    desc: "Анализ числового значения имени, фамилии и их влияния на судьбу.",
-    price: "от 2 500 ₽",
-    duration: "45 мин",
-  },
-];
-
-const REVIEWS = [
-  {
-    name: "Анна К.",
-    city: "Москва",
-    text: "Надежда очень точно описала мой характер и предсказала важные события года. Консультация изменила мой взгляд на многое.",
-    stars: 5,
-  },
-  {
-    name: "Мария В.",
-    city: "Санкт-Петербург",
-    text: "Впервые познакомилась с нумерологией через Надежду. Всё чётко, без воды, с практическими советами. Рекомендую!",
-    stars: 5,
-  },
-  {
-    name: "Елена Р.",
-    city: "Екатеринбург",
-    text: "Заказала прогноз на год — уже три месяца следую рекомендациям. Результаты ощутимы. Спасибо за такую работу!",
-    stars: 5,
-  },
+  { label: "Контакты", href: "#contacts" },
 ];
 
 const FAQ_ITEMS = [
+  { q: "Это бесплатно?", a: "Да, тест НЕЙРО ID — бесплатный. Расшифровка результата и полные разборы — платные." },
+  { q: "Что я узнаю о себе?", a: "Ведущий гормон, тип мозга (рептильный/лимбический/неокортекс), уровень энергии и буквенно-числовой код вашего потока." },
+  { q: "Как я получу расшифровку?", a: "Я напишу вам в Telegram после теста. Вы оплачиваете 1500 руб. — и я присылаю PDF на 5 страниц." },
+  { q: "Что такое «Инструкция к человеку»?", a: "Это моя авторская система, которая соединяет нумерологию, нейрофизиологию и ритмологию в один экшн-план под ваш тип." },
+  { q: "Сколько стоит полный разбор?", a: "Базовый — 25 000 руб., премиум — 50 000 руб., VIP-сопровождение на год — от 150 000 руб." },
+  { q: "Есть ли гарантия?", a: "Да. Вы получаете чёткий письменный план. Если после разбора у вас не появится ясность — я верну деньги." },
+];
+
+const SERVICES_DATA = [
   {
-    q: "Как проходит консультация?",
-    a: "Онлайн через Zoom или Telegram. Вы называете дату рождения, я готовлю матрицу заранее и объясняю каждое число. После — запись консультации.",
+    title: "Расшифровка NEURO ID",
+    desc: "PDF 5 страниц: ваш код, гормон, тип мозга, 3 шага",
+    price: "1 500 руб.",
+    premium: false,
+    icon: "Brain",
   },
   {
-    q: "Нужна ли вера в нумерологию?",
-    a: "Нет. Матрица Пифагора — это математический метод. Достаточно открытости и желания лучше понять себя.",
+    title: "«Инструкция к человеку». Базовый разбор",
+    desc: "PDF 15 стр. + 1 созвон 60 мин: квадрат Пифагора — программа на воплощение, творческий потенциал, темперамент, поддержка извне, денежный канал, миссия, экшн-план на 3 месяца",
+    price: "25 000 руб.",
+    premium: false,
+    icon: "BookOpen",
   },
   {
-    q: "Как быстро вы делаете расчёт?",
-    a: "Матрица готовится в течение 24 часов после оплаты. Консультацию назначаем на удобное для вас время.",
+    title: "«Инструкция к человеку». Премиум",
+    desc: "Всё из базового + мандала ФИО + персональный числовой код + полная матрица судьбы + экшн-план на год",
+    price: "50 000 руб.",
+    premium: true,
+    icon: "Sparkles",
+    details: [
+      "Задачи и сценарии из прошлого, которые повторяются у вас сейчас",
+      "Через какие энергии к вам приходят деньги (и почему сейчас они не идут)",
+      "Какие энергии нужно включить, чтобы доход вырос",
+      "Что именно блокирует ваши финансы прямо сейчас и как убрать блок",
+      "Зону родительско-детских отношений (если это ваш запрос)",
+    ],
   },
   {
-    q: "Есть ли гарантия результата?",
-    a: "Нумерология — это инструмент самопознания, а не магия. Я гарантирую качественную и честную работу с вашими числами.",
+    title: "VIP «Год под ключ»",
+    desc: "Премиум + 12 ежемесячных созвонов + чат",
+    price: "150 000 руб.",
+    premium: false,
+    icon: "Crown",
   },
   {
-    q: "Можно ли заказать расчёт в подарок?",
-    a: "Да! Оформите подарочный сертификат — я пришлю его в красивом цифровом формате.",
+    title: "Клуб «Инструкция к человеку»",
+    desc: "Вебинары 1 раз в неделю + закрытый чат",
+    price: "3 500 руб./мес",
+    premium: false,
+    icon: "Users",
   },
 ];
 
-function StarRating({ count }: { count: number }) {
-  return (
-    <div className="flex gap-1 mb-3">
-      {Array.from({ length: count }).map((_, i) => (
-        <span key={i} style={{ color: "var(--gold)", fontSize: "0.9rem" }}>★</span>
-      ))}
-    </div>
-  );
-}
+const CASES = [
+  {
+    name: "Елена, 42 года",
+    before: "Доход 80 000 руб., чувство, что «стою на месте»",
+    got: "НЕЙРО ID (2С) + полную «Инструкцию к человеку»",
+    after: "Через 2 месяца запустила онлайн-курс, доход 150 000 руб.",
+  },
+  {
+    name: "Олег, 38 лет",
+    before: "Кризис в бизнесе, не понимал, куда двигаться",
+    got: "Экшн-план на год с учётом задач на воплощение и ведущего гормона",
+    after: "Выручка выросла на 40% за 3 месяца",
+  },
+  {
+    name: "Кристина, 36 лет",
+    before: "Развод после 12 лет брака, не понимала, как жить дальше",
+    got: "НЕЙРО ID (4С) + полную «Инструкцию к человеку» + экшн-план на 2 года",
+    after: "Новые отношения, увеличила доход в 2 раза, запустила онлайн-проект",
+  },
+];
 
 function FaqItem({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false);
@@ -154,16 +94,16 @@ function FaqItem({ q, a }: { q: string; a: string }) {
       onClick={() => setOpen(!open)}
     >
       <div className="flex items-center justify-between gap-4">
-        <span className="font-golos text-sm font-medium text-warm-dark">{q}</span>
+        <span className="font-golos text-sm font-medium" style={{ color: "var(--warm-dark)" }}>{q}</span>
         <span
-          className="text-blush flex-shrink-0"
-          style={{ transform: open ? "rotate(45deg)" : "rotate(0)", transition: "transform 0.3s" }}
+          className="flex-shrink-0"
+          style={{ color: "var(--blush)", transform: open ? "rotate(45deg)" : "rotate(0)", transition: "transform 0.3s" }}
         >
           <Icon name="Plus" size={18} />
         </span>
       </div>
       {open && (
-        <p className="font-golos text-warm-mid mt-3 leading-relaxed fade-in" style={{ fontSize: "0.875rem" }}>
+        <p className="font-golos leading-relaxed mt-3 fade-in" style={{ color: "var(--warm-mid)", fontSize: "0.875rem" }}>
           {a}
         </p>
       )}
@@ -171,37 +111,59 @@ function FaqItem({ q, a }: { q: string; a: string }) {
   );
 }
 
+function ServiceCard({ s }: { s: typeof SERVICES_DATA[0] }) {
+  const [expanded, setExpanded] = useState(false);
+  return (
+    <div className="card-soft p-7 flex flex-col gap-3" style={s.premium ? { border: "2px solid var(--blush)" } : {}}>
+      <div className="flex items-center gap-3 mb-1">
+        <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: "var(--blush-light)" }}>
+          <Icon name={s.icon} fallback="Star" size={20} style={{ color: "var(--blush)" }} />
+        </div>
+        {s.premium && (
+          <span className="font-golos text-xs px-3 py-1 rounded-full" style={{ background: "var(--blush)", color: "white", letterSpacing: "0.05em" }}>
+            Хит
+          </span>
+        )}
+      </div>
+      <h3 className="font-cormorant" style={{ color: "var(--warm-dark)", fontSize: "1.25rem" }}>{s.title}</h3>
+      <p className="font-golos leading-relaxed" style={{ color: "var(--warm-mid)", fontSize: "0.875rem" }}>{s.desc}</p>
+      {s.details && (
+        <div>
+          <button
+            className="font-golos text-xs underline cursor-pointer"
+            style={{ color: "var(--blush)", background: "none", border: "none" }}
+            onClick={() => setExpanded(!expanded)}
+          >
+            {expanded ? "Скрыть подробности ▲" : "Подробнее о пакете ▼"}
+          </button>
+          {expanded && (
+            <ul className="mt-3 flex flex-col gap-2 fade-in">
+              {s.details.map((d, i) => (
+                <li key={i} className="font-golos flex gap-2" style={{ color: "var(--warm-mid)", fontSize: "0.82rem" }}>
+                  <span style={{ color: "var(--blush)", flexShrink: 0 }}>•</span>
+                  {d}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      )}
+      <div className="flex items-center justify-between mt-auto pt-3" style={{ borderTop: "1px solid var(--sand)" }}>
+        <span className="font-cormorant" style={{ color: "var(--blush)", fontSize: "1.4rem" }}>{s.price}</span>
+        <a href="#contacts" className="btn-outline" style={{ padding: "0.4rem 1rem", fontSize: "0.72rem" }}>
+          Записаться
+        </a>
+      </div>
+    </div>
+  );
+}
+
 const Index = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [date, setDate] = useState("");
-  const [result, setResult] = useState<ReturnType<typeof calcPythagorasMatrix>>(null);
-  const [calcError, setCalcError] = useState("");
-  const [formData, setFormData] = useState({ name: "", phone: "", message: "" });
-
-  function handleCalculate() {
-    setCalcError("");
-    if (!/^\d{2}\.\d{2}\.\d{4}$/.test(date)) {
-      setCalcError("Введите дату в формате ДД.ММ.ГГГГ");
-      return;
-    }
-    const r = calcPythagorasMatrix(date);
-    if (!r) {
-      setCalcError("Не удалось рассчитать матрицу. Проверьте дату.");
-      return;
-    }
-    setResult(r);
-  }
-
-  function handleDateInput(val: string) {
-    let v = val.replace(/\D/g, "");
-    if (v.length > 2 && v.length <= 4) v = v.slice(0, 2) + "." + v.slice(2);
-    else if (v.length > 4) v = v.slice(0, 2) + "." + v.slice(2, 4) + "." + v.slice(4, 8);
-    setDate(v);
-    setResult(null);
-  }
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: "var(--cream)" }}>
+
       {/* NAV */}
       <nav
         className="fixed top-0 left-0 right-0 z-50"
@@ -222,8 +184,14 @@ const Index = () => {
               </a>
             ))}
           </div>
-          <a href="#contacts" className="hidden md:inline-block btn-primary" style={{ padding: "0.5rem 1.25rem", fontSize: "0.7rem" }}>
-            Записаться
+          <a
+            href="https://t.me/NadezhdaElka"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden md:inline-block btn-primary"
+            style={{ padding: "0.5rem 1.25rem", fontSize: "0.7rem" }}
+          >
+            Пройти тест
           </a>
           <button
             className="md:hidden"
@@ -239,43 +207,53 @@ const Index = () => {
             style={{ borderTop: "1px solid var(--sand)", background: "rgba(247,243,238,0.97)" }}
           >
             {NAV_ITEMS.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                className="nav-link py-1"
-                onClick={() => setMenuOpen(false)}
-              >
+              <a key={item.href} href={item.href} className="nav-link" onClick={() => setMenuOpen(false)}>
                 {item.label}
               </a>
             ))}
-            <a href="#contacts" className="btn-primary text-center mt-2">Записаться</a>
+            <a href="https://t.me/NadezhdaElka" target="_blank" rel="noopener noreferrer" className="btn-primary text-center mt-2">
+              Пройти тест
+            </a>
           </div>
         )}
       </nav>
 
-      {/* HERO */}
+      {/* 1. HERO */}
       <section
         className="pt-32 pb-20 px-6"
         style={{ background: "linear-gradient(155deg, var(--cream) 45%, var(--blush-light) 100%)" }}
       >
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
           <div className="fade-in">
-            <p className="section-subtitle mb-4">Нумеролог · Матрица Пифагора</p>
             <h1
-              className="font-cormorant mb-6 leading-tight"
-              style={{ fontSize: "clamp(2.8rem, 7vw, 5rem)", fontWeight: 300, color: "var(--warm-dark)" }}
+              className="font-cormorant mb-5 leading-tight"
+              style={{ fontSize: "clamp(2.2rem, 5.5vw, 4rem)", fontWeight: 400, color: "var(--warm-dark)" }}
             >
-              Числа знают{" "}
-              <em style={{ color: "var(--blush)", fontStyle: "italic" }}>всё</em>
-              <br />о вашей судьбе
+              Узнайте свой{" "}
+              <em style={{ color: "var(--blush)", fontStyle: "italic" }}>НЕЙРО-ID</em>
+              {" "}за 5 минут
             </h1>
-            <p className="font-golos leading-relaxed mb-8 max-w-md" style={{ color: "var(--warm-mid)", fontSize: "1rem" }}>
-              Я помогаю найти ответы на важные вопросы через язык чисел. Каждая дата рождения — это уникальный код вашей личности.
+            <p className="font-golos leading-relaxed mb-2" style={{ color: "var(--warm-mid)", fontSize: "1rem" }}>
+              Ведущий гормон + тип мозга + уровень энергии
             </p>
-            <div className="flex flex-wrap gap-4">
-              <a href="#calculator" className="btn-primary">Рассчитать матрицу</a>
-              <a href="#services" className="btn-outline">Мои услуги</a>
-            </div>
+            <p className="font-golos mb-8" style={{ color: "var(--warm-mid)", fontSize: "0.95rem" }}>
+              Бесплатно. Без регистрации. Результат сразу.
+            </p>
+            <a
+              href="https://t.me/NadezhdaElka"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary inline-block"
+              style={{ fontSize: "1rem", padding: "0.9rem 2rem" }}
+            >
+              Бесплатно пройти тест НЕЙРО-ID
+            </a>
+            <p className="font-golos mt-4 max-w-sm" style={{ color: "var(--warm-mid)", fontSize: "0.78rem", lineHeight: 1.6 }}>
+              После прохождения я пришлю вам в Telegram личную расшифровку результата — что ваш код значит для денег, энергии и целей.
+            </p>
+            <p className="font-golos mt-4 font-medium" style={{ color: "var(--blush)", fontSize: "0.85rem" }}>
+              Уже прошли: более 9 000 человек
+            </p>
           </div>
           <div className="flex justify-center fade-in stagger-2">
             <div className="relative" style={{ width: 320, height: 380 }}>
@@ -309,51 +287,111 @@ const Index = () => {
         </div>
       </section>
 
-      {/* ABOUT */}
-      <section id="about" className="py-20 px-6" style={{ scrollMarginTop: "5rem" }}>
-        <div className="max-w-6xl mx-auto">
-          <div className="max-w-2xl mx-auto text-center mb-14">
-            <p className="section-subtitle mb-3">О мастере</p>
-            <h2 className="section-title mb-5">Надежда Ельчина</h2>
-            <p className="font-golos leading-relaxed" style={{ color: "var(--warm-mid)", fontSize: "0.95rem" }}>
-              Практикующий нумеролог с 12-летним опытом. Специализируюсь на матрице Пифагора —
-              древней системе, которая раскрывает потенциал личности через числа даты рождения.
-            </p>
+      {/* 2. ЧТО ВЫ УЗНАЕТЕ */}
+      <section className="py-20 px-6" style={{ background: "var(--blush-light)" }}>
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="section-title mb-4">За 5 минут и 5 вопросов вы получите:</h2>
           </div>
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-6 mb-10">
             {[
-              { num: "200+", label: "Консультаций проведено" },
-              { num: "5", label: "Лет в нумерологии" },
-              { num: "98%", label: "Довольных клиентов" },
-            ].map((s, i) => (
-              <div key={i} className={`card-soft p-8 text-center fade-in stagger-${i + 1}`}>
-                <p className="font-cormorant text-blush mb-2" style={{ fontSize: "3rem" }}>{s.num}</p>
-                <p className="font-golos" style={{ color: "var(--warm-mid)", fontSize: "0.875rem" }}>{s.label}</p>
+              { emoji: "🧠", text: "Ваш ведущий тип мозга — рептильный, лимбический или неокортекс" },
+              { emoji: "⚡️", text: "Ваш ведущий гормон — то, что управляет вашей энергией и деньгами" },
+              { emoji: "📊", text: "Уровень энергии прямо сейчас — точка отсчёта" },
+              { emoji: "🔑", text: "Буквенно-числовой код вашего потока — ключ к расшифровке миссии" },
+            ].map((item, i) => (
+              <div key={i} className={`card-soft p-6 text-center fade-in stagger-${i + 1}`}>
+                <div className="text-4xl mb-4">{item.emoji}</div>
+                <p className="font-golos leading-relaxed" style={{ color: "var(--warm-dark)", fontSize: "0.875rem" }}>{item.text}</p>
               </div>
             ))}
           </div>
-          <div className="mt-10 card-soft p-8 md:p-10">
-            <div className="grid md:grid-cols-2 gap-8 items-center">
-              <div>
-                <h3 className="font-cormorant mb-4" style={{ color: "var(--warm-dark)", fontSize: "1.5rem" }}>Мой путь в нумерологии</h3>
-                <p className="font-golos leading-relaxed mb-4" style={{ color: "var(--warm-mid)", fontSize: "0.9rem" }}>
-                  Я пришла к нумерологии через личный кризис. Цифры помогли мне найти себя и понять
-                  своё предназначение. С тех пор я помогаю другим — через честную и точную работу
-                  с числами без мистики и туманных предсказаний.
+          <p className="font-golos text-center mb-8" style={{ color: "var(--warm-mid)", fontSize: "0.82rem" }}>
+            Почему вы устаёте и куда уходит ваша энергия — вы узнаете в личной расшифровке результата (1500 руб.) или на бесплатном созвоне со мной.
+          </p>
+          <div className="text-center">
+            <a
+              href="https://t.me/NadezhdaElka"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary inline-block"
+            >
+              Пройти тест бесплатно
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* 3. О МАСТЕРЕ */}
+      <section id="about" className="py-20 px-6" style={{ scrollMarginTop: "5rem" }}>
+        <div className="max-w-5xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-14 items-start">
+            <div>
+              <p className="section-subtitle mb-3">О мастере</p>
+              <h2 className="section-title mb-6">
+                Меня зовут Надежда Ельчина.<br />
+                Я создала «Инструкцию к человеку»
+              </h2>
+              <div className="font-golos leading-relaxed flex flex-col gap-4" style={{ color: "var(--warm-mid)", fontSize: "0.92rem" }}>
+                <p>
+                  5 лет я искала ответ: почему даже глубокие разборы не дают долгосрочного результата?
                 </p>
-                <p className="font-golos leading-relaxed" style={{ color: "var(--warm-mid)", fontSize: "0.9rem" }}>
-                  Прошла обучение в Школе нумерологии Москвы, участвовала в международных
-                  конференциях по нумерологии и психологии личности.
+                <p>
+                  Потому что любой метод — это только один срез. А человек — это система.
+                </p>
+                <p>Я соединила 4 разрозненные системы в единую живую методологию:</p>
+                <ul className="flex flex-col gap-2 pl-1">
+                  {[
+                    "Нумерологию и Матрицу судьбы — кармические задачи, предназначение, денежный код",
+                    "Нейрофизиологию личности (NEURO ID) — ваш ведущий гормон и тип мозга",
+                    "Ритмологию — расшифровку вашего ФИО через индивидуальную мандалу. Вы узнаете свои сильные стороны, есть ли родовая поддержка, что в имени помогает влиять на пространство, а что мешает достигать целей, и какие уроки вы будете проходить, пока не смените ФИО.",
+                  ].map((item, i) => (
+                    <li key={i} className="flex gap-2">
+                      <span style={{ color: "var(--blush)", flexShrink: 0 }}>•</span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+                <p>
+                  Результат — не разрозненные факты о вас. А «Инструкция к человеку»: чёткий экшн-план, привязанный к вашему нейротипу, и понимание законов мироздания, которые вы нарушаете.
+                </p>
+                <p style={{ color: "var(--warm-dark)", fontWeight: 500 }}>
+                  Я не даю волшебную таблетку. Я даю карту, компас и знание, как не заблудиться снова.
                 </p>
               </div>
-              <div className="grid grid-cols-2 gap-4">
-                {["Матрица Пифагора", "Совместимость", "Нумерология имён", "Годовые прогнозы"].map((t, i) => (
+              <a
+                href="https://t.me/NadezhdaElka"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary inline-block mt-8"
+              >
+                Узнать свой НЕЙРО-ID
+              </a>
+            </div>
+            <div className="flex flex-col gap-5">
+              <div className="grid grid-cols-3 gap-4 mb-2">
+                {[
+                  { num: "200+", label: "Консультаций проведено" },
+                  { num: "5", label: "Лет в работе" },
+                  { num: "98%", label: "Довольных клиентов" },
+                ].map((s, i) => (
+                  <div key={i} className="card-soft p-5 text-center">
+                    <p className="font-cormorant" style={{ color: "var(--blush)", fontSize: "2.2rem" }}>{s.num}</p>
+                    <p className="font-golos" style={{ color: "var(--warm-mid)", fontSize: "0.72rem" }}>{s.label}</p>
+                  </div>
+                ))}
+              </div>
+              <div className="card-soft p-6">
+                <p className="font-golos font-medium mb-3" style={{ color: "var(--warm-dark)", fontSize: "0.9rem" }}>
+                  Методологии в системе:
+                </p>
+                {["Нумерология", "Матрица судьбы", "NEURO ID", "Ритмология"].map((t, i) => (
                   <div
                     key={i}
-                    className="p-4 rounded-xl text-center"
-                    style={{ background: "var(--blush-light)", border: "1px solid var(--sand)" }}
+                    className="px-4 py-2 rounded-xl mb-2 font-golos text-sm"
+                    style={{ background: "var(--blush-light)", color: "var(--warm-dark)", border: "1px solid var(--sand)" }}
                   >
-                    <p className="font-golos font-medium text-sm" style={{ color: "var(--warm-dark)" }}>{t}</p>
+                    {t}
                   </div>
                 ))}
               </div>
@@ -362,300 +400,160 @@ const Index = () => {
         </div>
       </section>
 
-      {/* CALCULATOR */}
-      <section
-        id="calculator"
-        className="py-20 px-6"
-        style={{ background: "var(--blush-light)", scrollMarginTop: "5rem" }}
-      >
-        <div className="max-w-4xl mx-auto">
+      {/* 4. ДЛЯ КОГО */}
+      <section className="py-20 px-6" style={{ background: "var(--sand)" }}>
+        <div className="max-w-3xl mx-auto">
+          <div className="text-center mb-10">
+            <h2 className="section-title">Этот тест — для вас, если:</h2>
+          </div>
+          <div className="card-soft p-8 flex flex-col gap-5 mb-8">
+            {[
+              "Вам 35+ и вы чувствуете, что живёте не свою жизнь",
+              "У вас есть доход, но вы не понимаете, почему не растёте",
+              "Вы в кризисе, карьерной трансформации или на перепутье",
+              "Вы хотите не «просто узнать о себе», а получить чёткий план действий",
+              "Вы пробовали психологов и коучей, но результата хватало на месяц",
+            ].map((item, i) => (
+              <div key={i} className="flex gap-3 items-start">
+                <span className="font-cormorant font-bold flex-shrink-0" style={{ color: "var(--blush)", fontSize: "1.1rem" }}>✓</span>
+                <p className="font-golos" style={{ color: "var(--warm-dark)", fontSize: "0.92rem" }}>{item}</p>
+              </div>
+            ))}
+          </div>
+          <div className="text-center">
+            <a
+              href="https://t.me/NadezhdaElka"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary inline-block"
+            >
+              Пройти тест
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* 5. ЧТО ДАЛЬШЕ */}
+      <section className="py-20 px-6">
+        <div className="max-w-3xl mx-auto">
           <div className="text-center mb-12">
-            <p className="section-subtitle mb-3">Попробуйте бесплатно</p>
-            <h2 className="section-title mb-4">Калькулятор матрицы Пифагора</h2>
-            <p className="font-golos" style={{ color: "var(--warm-mid)", fontSize: "0.9rem" }}>
-              Введите дату рождения и получите свою числовую матрицу с кратким толкованием
-            </p>
+            <h2 className="section-title">Что вы получите после теста?</h2>
           </div>
-
-          <div className="card-soft p-8 mb-8 max-w-md mx-auto">
-            <label className="font-golos block mb-2" style={{ color: "var(--warm-mid)", fontSize: "0.7rem", letterSpacing: "0.15em", textTransform: "uppercase" }}>
-              Дата рождения
-            </label>
-            <div className="flex gap-3">
-              <input
-                type="text"
-                value={date}
-                onChange={(e) => handleDateInput(e.target.value)}
-                placeholder="ДД.ММ.ГГГГ"
-                maxLength={10}
-                className="flex-1 px-4 py-3 rounded-xl font-golos text-sm outline-none"
-                style={{
-                  border: "1px solid var(--sand)",
-                  background: "var(--cream)",
-                  color: "var(--warm-dark)",
-                }}
-                onKeyDown={(e) => e.key === "Enter" && handleCalculate()}
-              />
-              <button className="btn-primary" onClick={handleCalculate} style={{ padding: "0.75rem 1.25rem" }}>
-                Рассчитать
-              </button>
-            </div>
-            {calcError && (
-              <p className="font-golos text-xs mt-2" style={{ color: "#e05050" }}>{calcError}</p>
-            )}
-          </div>
-
-          {result && (
-            <div className="fade-in">
-              <div className="card-soft p-8 mb-6">
-                <h3 className="font-cormorant text-center mb-6" style={{ color: "var(--warm-dark)", fontSize: "1.4rem" }}>
-                  Ваша матрица
-                </h3>
-                <div className="grid grid-cols-3 gap-3 max-w-xs mx-auto mb-6">
-                  {MATRIX_POSITIONS.map((row) =>
-                    row.map((num) => {
-                      const count = result.counts[num];
-                      const display = count > 0 ? String(num).repeat(count) : "—";
-                      return (
-                        <div
-                          key={num}
-                          className={`matrix-cell ${count > 0 ? "filled" : ""}`}
-                          title={INTERPRETATIONS[num].title}
-                        >
-                          <div className="text-center">
-                            <div style={{ fontSize: count > 3 ? "0.9rem" : "1.1rem" }}>{display}</div>
-                            <div style={{ fontSize: "0.55rem", opacity: 0.75, marginTop: 2 }}>
-                              {INTERPRETATIONS[num].title}
-                            </div>
-                          </div>
-                        </div>
-                      );
-                    })
-                  )}
-                </div>
+          <div className="flex flex-col gap-6 mb-10">
+            {[
+              {
+                step: "1",
+                title: "Результат НЕЙРО ID",
+                desc: "Вы узнаете свой код (например, 3Н), ведущий гормон и тип мозга",
+              },
+              {
+                step: "2",
+                title: "Расшифровка в Telegram",
+                desc: "Я пришлю вам личную расшифровку на 5 страниц — что ваш код значит для денег, энергии и целей. Стоимость: 1 500 руб.",
+              },
+              {
+                step: "3",
+                title: "Полная «Инструкция к человеку»",
+                desc: "Хотите экшн-план на год, расшифровку ФИО через мандалу и персональный числовой код? Запишитесь на бесплатный 15-минутный созвон — я покажу, как это работает на примере других клиентов.",
+              },
+            ].map((item, i) => (
+              <div key={i} className="card-soft p-7 flex gap-5 items-start">
                 <div
-                  className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-4 p-4 rounded-xl text-center"
-                  style={{ background: "var(--cream)" }}
+                  className="w-12 h-12 rounded-full flex items-center justify-center font-cormorant flex-shrink-0"
+                  style={{ background: "var(--blush)", color: "white", fontSize: "1.4rem" }}
                 >
-                  {[
-                    { label: "Число 1", val: result.sum1 },
-                    { label: "Число 2", val: result.sum2 },
-                    { label: "Число 3", val: result.sum3 },
-                    { label: "Число 4", val: result.sum4 },
-                  ].map((s, i) => (
-                    <div key={i}>
-                      <p className="font-golos" style={{ color: "var(--warm-mid)", fontSize: "0.65rem", textTransform: "uppercase", letterSpacing: "0.1em" }}>{s.label}</p>
-                      <p className="font-cormorant text-blush" style={{ fontSize: "2rem" }}>{s.val}</p>
-                    </div>
-                  ))}
+                  {item.step}
+                </div>
+                <div>
+                  <h3 className="font-cormorant mb-2" style={{ color: "var(--warm-dark)", fontSize: "1.2rem" }}>{item.title}</h3>
+                  <p className="font-golos leading-relaxed" style={{ color: "var(--warm-mid)", fontSize: "0.88rem" }}>{item.desc}</p>
                 </div>
               </div>
-
-              <div className="grid md:grid-cols-2 gap-4">
-                {Object.entries(INTERPRETATIONS).map(([key, { title, desc }]) => {
-                  const num = parseInt(key);
-                  const count = result.counts[num];
-                  return (
-                    <div
-                      key={key}
-                      className="card-soft p-5 flex gap-4 items-start"
-                      style={count > 0 ? { borderColor: "var(--blush)", borderWidth: "1.5px" } : {}}
-                    >
-                      <div
-                        className="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center font-cormorant"
-                        style={{
-                          fontSize: "1.2rem",
-                          background: count > 0 ? "var(--blush)" : "var(--blush-light)",
-                          color: count > 0 ? "white" : "var(--warm-mid)",
-                        }}
-                      >
-                        {num}
-                      </div>
-                      <div>
-                        <p className="font-golos font-medium text-sm mb-1" style={{ color: "var(--warm-dark)" }}>{title}</p>
-                        <p className="font-golos leading-relaxed" style={{ color: "var(--warm-mid)", fontSize: "0.8rem" }}>
-                          {count > 0
-                            ? `У вас ${count} ${count === 1 ? "единица" : "единицы"}: ${desc}`
-                            : `Это число отсутствует. ${desc}`}
-                        </p>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-
-              <div className="text-center mt-8">
-                <p className="font-golos mb-4" style={{ color: "var(--warm-mid)", fontSize: "0.9rem" }}>
-                  Хотите узнать глубинный смысл своей матрицы?
-                </p>
-                <a href="#contacts" className="btn-primary">Записаться на консультацию</a>
-              </div>
-            </div>
-          )}
+            ))}
+          </div>
+          <div className="text-center">
+            <a
+              href="https://t.me/NadezhdaElka"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary inline-block"
+            >
+              Начать с бесплатного теста
+            </a>
+          </div>
         </div>
       </section>
 
-      {/* SERVICES */}
+      {/* 6. КЕЙСЫ */}
+      <section id="reviews" className="py-20 px-6" style={{ background: "var(--blush-light)", scrollMarginTop: "5rem" }}>
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-12">
+            <p className="section-subtitle mb-3">Результаты клиентов</p>
+            <h2 className="section-title">Уже работают со мной</h2>
+          </div>
+          <div className="grid md:grid-cols-3 gap-6 mb-10">
+            {CASES.map((c, i) => (
+              <div key={i} className={`card-soft p-7 flex flex-col gap-4 fade-in stagger-${i + 1}`}>
+                <p className="font-cormorant" style={{ color: "var(--warm-dark)", fontSize: "1.2rem", fontWeight: 500 }}>{c.name}</p>
+                <div>
+                  <p className="font-golos text-xs mb-1" style={{ color: "var(--blush)", textTransform: "uppercase", letterSpacing: "0.1em" }}>Было</p>
+                  <p className="font-golos text-sm leading-relaxed" style={{ color: "var(--warm-mid)" }}>{c.before}</p>
+                </div>
+                <div>
+                  <p className="font-golos text-xs mb-1" style={{ color: "var(--blush)", textTransform: "uppercase", letterSpacing: "0.1em" }}>Получила / получил</p>
+                  <p className="font-golos text-sm leading-relaxed" style={{ color: "var(--warm-mid)" }}>{c.got}</p>
+                </div>
+                <div className="pt-3" style={{ borderTop: "1px solid var(--sand)" }}>
+                  <p className="font-golos text-xs mb-1" style={{ color: "var(--blush)", textTransform: "uppercase", letterSpacing: "0.1em" }}>Стало</p>
+                  <p className="font-golos text-sm font-medium leading-relaxed" style={{ color: "var(--warm-dark)" }}>{c.after}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="text-center">
+            <a
+              href="https://t.me/NadezhdaElka"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary inline-block"
+            >
+              Хочу так же — пройти тест
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* 7. УСЛУГИ И ЦЕНЫ */}
       <section id="services" className="py-20 px-6" style={{ scrollMarginTop: "5rem" }}>
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-14">
-            <p className="section-subtitle mb-3">Услуги</p>
-            <h2 className="section-title">Чем я могу помочь</h2>
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-12">
+            <p className="section-subtitle mb-3">Услуги и цены</p>
+            <h2 className="section-title">Выберите свой формат</h2>
           </div>
-          <div className="grid md:grid-cols-2 gap-6">
-            {SERVICES.map((s, i) => (
-              <div key={i} className={`card-soft p-8 fade-in stagger-${i + 1}`}>
-                <div className="flex items-start gap-5">
-                  <div
-                    className="w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0"
-                    style={{ background: "var(--blush-light)" }}
-                  >
-                    <Icon name={s.icon} fallback="Star" size={22} style={{ color: "var(--blush)" }} />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="font-cormorant mb-2" style={{ color: "var(--warm-dark)", fontSize: "1.3rem" }}>{s.title}</h3>
-                    <p className="font-golos leading-relaxed mb-4" style={{ color: "var(--warm-mid)", fontSize: "0.875rem" }}>
-                      {s.desc}
-                    </p>
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <span className="font-cormorant text-blush" style={{ fontSize: "1.3rem" }}>{s.price}</span>
-                        <span className="font-golos ml-3" style={{ color: "var(--warm-mid)", fontSize: "0.75rem" }}>{s.duration}</span>
-                      </div>
-                      <a href="#contacts" className="btn-outline" style={{ padding: "0.45rem 1.1rem", fontSize: "0.7rem" }}>
-                        Записаться
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
+          <div className="grid md:grid-cols-2 gap-6 mb-10">
+            {SERVICES_DATA.map((s, i) => (
+              <ServiceCard key={i} s={s} />
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* REVIEWS */}
-      <section
-        id="reviews"
-        className="py-20 px-6"
-        style={{ background: "var(--sand)", scrollMarginTop: "5rem" }}
-      >
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-14">
-            <p className="section-subtitle mb-3">Отзывы</p>
-            <h2 className="section-title">Что говорят клиенты</h2>
-          </div>
-          <div className="grid md:grid-cols-3 gap-6">
-            {REVIEWS.map((r, i) => (
-              <div key={i} className={`card-soft p-7 fade-in stagger-${i + 1}`}>
-                <StarRating count={r.stars} />
-                <p className="font-golos leading-relaxed mb-5" style={{ color: "var(--warm-dark)", fontSize: "0.9rem" }}>
-                  "{r.text}"
-                </p>
-                <div className="flex items-center gap-3">
-                  <div
-                    className="w-9 h-9 rounded-full flex items-center justify-center font-cormorant"
-                    style={{ background: "var(--blush)", color: "white", fontSize: "1rem" }}
-                  >
-                    {r.name[0]}
-                  </div>
-                  <div>
-                    <p className="font-golos font-medium text-sm" style={{ color: "var(--warm-dark)" }}>{r.name}</p>
-                    <p className="font-golos" style={{ color: "var(--warm-mid)", fontSize: "0.72rem" }}>{r.city}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
+          <div className="text-center">
+            <a
+              href="https://t.me/NadezhdaElka"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary inline-block"
+            >
+              Начать с НЕЙРО-ID теста — бесплатно
+            </a>
           </div>
         </div>
       </section>
 
-      {/* CONTACTS */}
-      <section id="contacts" className="py-20 px-6" style={{ scrollMarginTop: "5rem" }}>
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-14">
-            <p className="section-subtitle mb-3">Контакты</p>
-            <h2 className="section-title">Записаться на консультацию</h2>
-          </div>
-          <div className="grid md:grid-cols-2 gap-10">
-            <div className="card-soft p-8">
-              <h3 className="font-cormorant mb-6" style={{ color: "var(--warm-dark)", fontSize: "1.4rem" }}>Оставьте заявку</h3>
-              <div className="flex flex-col gap-4">
-                <div>
-                  <label className="font-golos block mb-2" style={{ color: "var(--warm-mid)", fontSize: "0.7rem", letterSpacing: "0.15em", textTransform: "uppercase" }}>Ваше имя</label>
-                  <input
-                    type="text"
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    placeholder="Как вас зовут?"
-                    className="w-full px-4 py-3 rounded-xl font-golos text-sm outline-none"
-                    style={{ border: "1px solid var(--sand)", background: "var(--cream)", color: "var(--warm-dark)" }}
-                  />
-                </div>
-                <div>
-                  <label className="font-golos block mb-2" style={{ color: "var(--warm-mid)", fontSize: "0.7rem", letterSpacing: "0.15em", textTransform: "uppercase" }}>Телефон или Telegram</label>
-                  <input
-                    type="text"
-                    value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    placeholder="+7 900 000-00-00"
-                    className="w-full px-4 py-3 rounded-xl font-golos text-sm outline-none"
-                    style={{ border: "1px solid var(--sand)", background: "var(--cream)", color: "var(--warm-dark)" }}
-                  />
-                </div>
-                <div>
-                  <label className="font-golos block mb-2" style={{ color: "var(--warm-mid)", fontSize: "0.7rem", letterSpacing: "0.15em", textTransform: "uppercase" }}>Комментарий</label>
-                  <textarea
-                    value={formData.message}
-                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    placeholder="Какой вопрос вас волнует больше всего?"
-                    rows={4}
-                    className="w-full px-4 py-3 rounded-xl font-golos text-sm outline-none resize-none"
-                    style={{ border: "1px solid var(--sand)", background: "var(--cream)", color: "var(--warm-dark)" }}
-                  />
-                </div>
-                <button className="btn-primary w-full">
-                  Отправить заявку
-                </button>
-              </div>
-            </div>
-
-            <div className="flex flex-col gap-5 justify-center">
-              {[
-                { icon: "MessageCircle", label: "Telegram", value: "@nadezhda_numerolog", desc: "Напишите в любое время" },
-                { icon: "Phone", label: "WhatsApp", value: "+7 900 000-00-00", desc: "Пн–Пт, 10:00–20:00" },
-                { icon: "Mail", label: "Email", value: "info@numerolog.ru", desc: "Ответ в течение дня" },
-                { icon: "Video", label: "Формат", value: "Онлайн (Zoom / Telegram)", desc: "Удобно из любой точки мира" },
-              ].map((c, i) => (
-                <div key={i} className="card-soft p-5 flex items-center gap-4">
-                  <div
-                    className="w-11 h-11 rounded-2xl flex items-center justify-center flex-shrink-0"
-                    style={{ background: "var(--blush-light)" }}
-                  >
-                    <Icon name={c.icon} fallback="Mail" size={20} style={{ color: "var(--blush)" }} />
-                  </div>
-                  <div>
-                    <p className="font-golos" style={{ color: "var(--warm-mid)", fontSize: "0.68rem", textTransform: "uppercase", letterSpacing: "0.1em" }}>{c.label}</p>
-                    <p className="font-golos font-medium text-sm" style={{ color: "var(--warm-dark)" }}>{c.value}</p>
-                    <p className="font-golos" style={{ color: "var(--warm-mid)", fontSize: "0.72rem" }}>{c.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ */}
-      <section
-        id="faq"
-        className="py-20 px-6"
-        style={{ background: "var(--blush-light)", scrollMarginTop: "5rem" }}
-      >
+      {/* 8. FAQ */}
+      <section id="faq" className="py-20 px-6" style={{ background: "var(--sand)", scrollMarginTop: "5rem" }}>
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-12">
             <p className="section-subtitle mb-3">FAQ</p>
-            <h2 className="section-title">Частые вопросы</h2>
+            <h2 className="section-title">Коротко о главном</h2>
           </div>
           <div className="flex flex-col gap-3">
             {FAQ_ITEMS.map((item, i) => (
@@ -665,18 +563,101 @@ const Index = () => {
         </div>
       </section>
 
-      {/* FOOTER */}
+      {/* 9. ОТЗЫВЫ (скриншоты) */}
+      <section className="py-20 px-6" style={{ background: "var(--blush-light)" }}>
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-12">
+            <p className="section-subtitle mb-3">Отзывы</p>
+            <h2 className="section-title">Что говорят клиенты</h2>
+          </div>
+          <div className="card-soft p-10 text-center mb-8">
+            <p className="font-golos" style={{ color: "var(--warm-mid)", fontSize: "0.9rem" }}>
+              Скриншоты переписок появятся здесь — они сейчас готовятся.
+            </p>
+          </div>
+          <div className="text-center">
+            <a
+              href="https://t.me/NadezhdaElka"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary inline-block"
+            >
+              Пройти тест как Анна и Михаил
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* 10. FOOTER */}
       <footer
-        className="py-10 px-6 text-center"
-        style={{ borderTop: "1px solid var(--sand)", background: "var(--cream)" }}
+        id="contacts"
+        className="py-14 px-6"
+        style={{ borderTop: "1px solid var(--sand)", background: "var(--cream)", scrollMarginTop: "5rem" }}
       >
-        <p className="font-cormorant text-xl mb-2" style={{ color: "var(--warm-dark)" }}>Надежда Ельчина</p>
-        <p className="font-golos mb-4" style={{ color: "var(--warm-mid)", fontSize: "0.72rem", letterSpacing: "0.2em", textTransform: "uppercase" }}>
-          Нумеролог · Матрица Пифагора
-        </p>
-        <p className="font-golos" style={{ color: "var(--warm-mid)", fontSize: "0.75rem" }}>
-          © {new Date().getFullYear()} Все права защищены
-        </p>
+        <div className="max-w-4xl mx-auto">
+          <div className="grid md:grid-cols-3 gap-10 mb-10">
+            <div>
+              <p className="font-cormorant text-xl mb-2" style={{ color: "var(--warm-dark)" }}>Надежда Ельчина</p>
+              <p className="font-golos text-xs mb-4" style={{ color: "var(--warm-mid)", letterSpacing: "0.1em", textTransform: "uppercase" }}>
+                Система «Инструкция к человеку»
+              </p>
+              <a
+                href="https://t.me/NadezhdaElka"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary inline-block"
+                style={{ fontSize: "0.78rem", padding: "0.55rem 1.1rem" }}
+              >
+                Бесплатный НЕЙРО-ID тест
+              </a>
+            </div>
+            <div>
+              <p className="font-golos font-medium mb-4 text-sm" style={{ color: "var(--warm-dark)" }}>Навигация</p>
+              <div className="flex flex-col gap-2">
+                {[
+                  { label: "О мастере", href: "#about" },
+                  { label: "Услуги и цены", href: "#services" },
+                  { label: "FAQ", href: "#faq" },
+                  { label: "Отзывы", href: "#reviews" },
+                ].map((item) => (
+                  <a key={item.href} href={item.href} className="nav-link" style={{ fontSize: "0.85rem" }}>
+                    {item.label}
+                  </a>
+                ))}
+              </div>
+            </div>
+            <div>
+              <p className="font-golos font-medium mb-4 text-sm" style={{ color: "var(--warm-dark)" }}>Контакты</p>
+              <div className="flex flex-col gap-3">
+                <a
+                  href="https://t.me/NadezhdaElka"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 font-golos text-sm"
+                  style={{ color: "var(--warm-mid)" }}
+                >
+                  <Icon name="Send" size={16} style={{ color: "var(--blush)" }} />
+                  Telegram: @NadezhdaElka
+                </a>
+                <a
+                  href="https://vk.com/nadyaelchina"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 font-golos text-sm"
+                  style={{ color: "var(--warm-mid)" }}
+                >
+                  <Icon name="Users" size={16} style={{ color: "var(--blush)" }} />
+                  ВКонтакте: nadyaelchina
+                </a>
+              </div>
+            </div>
+          </div>
+          <div className="pt-6" style={{ borderTop: "1px solid var(--sand)" }}>
+            <p className="font-golos text-center" style={{ color: "var(--warm-mid)", fontSize: "0.75rem" }}>
+              © Надежда Ельчина, 2026. Система «Инструкция к человеку»
+            </p>
+          </div>
+        </div>
       </footer>
     </div>
   );
